@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#inicio-formulario {
+  display: flex;
+  flex-direction: row;
+}
+
+#logo-formulario {
+  margin-top: 3%;
+  margin-left: 3%;
+  width: 50px;
+}
+
+#titulo-formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: sans-serif;
+  font-size: 24px;
+  color: white;
+  margin-left: 10%;
+}
+
+#subtitulo-formulario {
+  font-family: sans-serif;
+  color: white;
+  margin-left: 94px;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  background-color: #f1f1f1;
+  font-family: sans-serif;
+  margin-left: 1%;
+  margin-top: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
+}
+
+label {
+  color: white;
+}
+
+#div-formulario {
+  background-color: #31955f;
+  width: 330px;
+  height: 694px;
+}
+
+#formulario {
+  margin-left: 6%;
+}
+
+input,
+select,
+textarea,
+button {
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+input,
+select {
+  width: 260px;
+  height: 24px;
+}
+
+.botao-formulario {
+  width: 128px;
+  height: 24px;
+}
+
+.campo {
+  margin-bottom: 1em;
+}
+
+#container-card-contador {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+}
+
+.card-contador {
+  border-radius: 5px;
+  background-color: white;
+  width: 120px;
+  height: 80px;
+  color: #084420;
+  text-align: center;
+}
+
+#container-card-dica {
+  border-radius: 5px;
+  height: 550px;
+  overflow-y: scroll;
+}
+
+#barra-pesquisa {
+  display: flex;
+  gap: 4px;
+}
+
+#container2 {
+  display: flex;
+  flex-direction: column;
+}
+
+#barra-pesquisa button {
+  padding: 5px;
+  border-radius: 40%;
+  background-color: white;
+  border: 2px solid #084420;
+}
+
+#input-pesquisa {
+  width: 595px;
+  height: 30px;
+  border: 2px solid #084420;
+  border-radius: 15px;
+}
+
+#modal {
+  width: 500px;
+  height: 500px;
+  background-color: #aba9a9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<br lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEVinKnowledge</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="shortcut icon"
+      href="./images/icons8-ideia-de-compartilhamento-64.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/c0a208043a.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <div id = "div-formulario">
+    
+    <div id = inicio-formulario>
+      <img
+        id="logo-formulario"
+        src="./images/icons8-knowledge-64.png"
+        alt="Logo DEVinKnowledge"/>
+        <h1 id="titulo-formulario">DEVinKnowledge</h1>
+    </div>
+      <p id="subtitulo-formulario">Learn, Code and Save</p>
+      </br>
+
+    <form id="formulario">
+      <div class="campo">
+        <label for="titulo">Título</label>
+      </br>
+        <input
+          type="text"
+          name="titulo"
+          id="titulo"
+          minlength="8"
+          maxlength="64"
+          placeholder="Digite um título"
+          required
+        />
+      </div>
+
+      <div class="campo">
+        <label for="linguagem">Linguagem/Skill</label>
+      </br>
+        <input
+          type="text"
+          name="linguagem"
+          id="linguagem"
+          minlength="4"
+          maxlength="16"
+          placeholder="Digite uma linguagem ou skill"
+          required
+        />
+      </div>
+
+      <div class="campo">
+        <label for="categoria">Categoria</label>
+      </br>
+        <select name="categoria" id="categoria" required>
+          <option value="" disabled selected hidden>
+            Selecione uma categoria
+          </option>
+          <option value="FrontEnd">FrontEnd</option>
+          <option value="BackEnd">BackEnd</option>
+          <option value="FullStack">FullStack</option>
+          <option value="SoftSkill/Comportamental">SoftSkill/Comportamental</option>
+          required
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="descricao">Descrição</label>
+      </br>
+        <textarea
+          name="descricao"
+          id="descricao"
+          cols="33"
+          rows="10"
+          minlength="32"
+          maxlength="512"
+          placeholder="Escreva aqui o detalhamento da sua dica"
+          required
+        ></textarea>
+      </div>
+
+      <div class="campo">
+        <label for="video">Vídeo do Youtube</label>
+      </br>
+        <input
+          type="url"
+          name="link-video"
+          id="link-video"
+          placeholder="https://suaurl.com"
+        />
+      </div>
+
+      <button id="botao-limpar" class="botao-formulario" type="reset">Limpar</button>
+      <button type="submit" id="botao-salvar" class="botao-formulario">Salvar</button>
+    </form>
+  </div>
+</br>
+
+<div id="container2">
+
+<div id="container-card-contador">
+  <div class="card-contador"><h3>Total</h3>
+  <div id="contador-total"></div>
+  </div>
+  <div class="card-contador"><h3>FrontEnd</h3>
+  <div id="contador-frontend"></div>
+  </div>
+  <div class="card-contador"><h3>BackEnd</h3>
+  <div id="contador-backend"></div>
+  </div>
+  <div class="card-contador"><h3>FullStack</h3>
+  <div id="contador-fullstack"></div>
+  </div>
+  <div class="card-contador"><h3>SoftSkill</h3>
+  <div id="contador-softskill"></div>
+  </div>
+</div>
+
+</br>
+
+<div id="barra-pesquisa">
+  <input id="input-pesquisa" type="search" name="search" placeholder="Digite um título para buscar">
+<div id="pesquisar"><button id="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button></div>
+<div id="limpar-pesquisa"><button id="botao-limpar-pesquisa"><i class="fa-solid fa-x"></i></button></div>
+</div>
+
+</br>
+
+<div id="container-card-dica"></div>
+
+</div>
+
+<div id="modal">
+  <header>
+    <h2>Vídeo do Youtube</h2>
+    <span id="fechar-modal">X</span>
+  </header>
+  <div id="corpo-modal">
+    <p>Conteúdo do modal</p>
+  </div>
+  <footer>
+    <button id="botao-fechar-modal">OK</button>
+  </footer>
+
+</div>
+
+<script src="./index.js"></script>
+</body>
+</html>
