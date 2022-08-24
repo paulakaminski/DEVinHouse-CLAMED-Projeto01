@@ -13,19 +13,24 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script src="https://kit.fontawesome.com/c0a208043a.js" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
   </head>
   <body>
 
     <div id = "div-formulario">
     
-    <div id = inicio-formulario>
+      <header id="header">
       <img
         id="logo-formulario"
-        src="./images/icons8-knowledge-64.png"
+        src="./images/logo.png"
         alt="Logo DEVinKnowledge"/>
+        <div id = inicio-formulario>
         <h1 id="titulo-formulario">DEVinKnowledge</h1>
-    </div>
-      <p id="subtitulo-formulario">Learn, Code and Save</p>
+        <p id="subtitulo-formulario">Learn, Code and Save</p>
+      </div>
+      </header>
+
       </br>
 
     <form id="formulario">
@@ -38,7 +43,7 @@
           id="titulo"
           minlength="8"
           maxlength="64"
-          placeholder="Digite um título"
+          placeholder=" Digite um título"
           required
         />
       </div>
@@ -52,7 +57,7 @@
           id="linguagem"
           minlength="4"
           maxlength="16"
-          placeholder="Digite uma linguagem ou skill"
+          placeholder=" Digite uma linguagem ou skill"
           required
         />
       </div>
@@ -62,7 +67,7 @@
       </br>
         <select name="categoria" id="categoria" required>
           <option value="" disabled selected hidden>
-            Selecione uma categoria
+             Selecione uma categoria
           </option>
           <option value="FrontEnd">FrontEnd</option>
           <option value="BackEnd">BackEnd</option>
@@ -78,11 +83,11 @@
         <textarea
           name="descricao"
           id="descricao"
-          cols="33"
+          cols="36"
           rows="10"
           minlength="32"
           maxlength="512"
-          placeholder="Escreva aqui o detalhamento da sua dica"
+          placeholder=" Escreva aqui o detalhamento da sua dica"
           required
         ></textarea>
       </div>
@@ -94,12 +99,13 @@
           type="url"
           name="link-video"
           id="link-video"
-          placeholder="https://suaurl.com"
+          placeholder=" https://suaurl.com"
         />
       </div>
-
+      <div id="botoes-formulario">
       <button id="botao-limpar" class="botao-formulario" type="reset">Limpar</button>
       <button type="submit" id="botao-salvar" class="botao-formulario">Salvar</button>
+      </div>
     </form>
   </div>
 </br>
@@ -107,27 +113,27 @@
 <div id="container2">
 
 <div id="container-card-contador">
-  <div class="card-contador"><h3>Total</h3>
-  <div id="contador-total"></div>
+  <div class="card-contador" button id="botao-contador-total"><h3>Total</h3>
+  <div id="contador-total" class="qtde-contador"></div>
   </div>
-  <div class="card-contador"><h3>FrontEnd</h3>
-  <div id="contador-frontend"></div>
+  <div class="card-contador" button id="botao-contador-frontend"><h3>FrontEnd</h3>
+  <div id="contador-frontend" class="qtde-contador"></div>
   </div>
-  <div class="card-contador"><h3>BackEnd</h3>
-  <div id="contador-backend"></div>
+  <div class="card-contador" button id="botao-contador-backend"><h3>BackEnd</h3>
+  <div id="contador-backend" class="qtde-contador"></div>
   </div>
-  <div class="card-contador"><h3>FullStack</h3>
-  <div id="contador-fullstack"></div>
+  <div class="card-contador" button id="botao-contador-fullstack"><h3>FullStack</h3>
+  <div id="contador-fullstack" class="qtde-contador"></div>
   </div>
-  <div class="card-contador"><h3>SoftSkill</h3>
-  <div id="contador-softskill"></div>
+  <div class="card-contador" button id="botao-contador-softskill"><h3>SoftSkill</h3>
+  <div id="contador-softskill" class="qtde-contador"></div>
   </div>
 </div>
 
 </br>
 
 <div id="barra-pesquisa">
-  <input id="input-pesquisa" type="search" name="search" placeholder="Digite um título para buscar">
+  <input id="input-pesquisa" type="search" name="search" placeholder=" Digite um título para buscar">
 <div id="pesquisar"><button id="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button></div>
 <div id="limpar-pesquisa"><button id="botao-limpar-pesquisa"><i class="fa-solid fa-x"></i></button></div>
 </div>
@@ -135,20 +141,6 @@
 </br>
 
 <div id="container-card-dica"></div>
-
-</div>
-
-<div id="modal">
-  <header>
-    <h2>Vídeo do Youtube</h2>
-    <span id="fechar-modal">X</span>
-  </header>
-  <div id="corpo-modal">
-    <p>Conteúdo do modal</p>
-  </div>
-  <footer>
-    <button id="botao-fechar-modal">OK</button>
-  </footer>
 
 </div>
 

@@ -3,31 +3,34 @@
   padding: 0;
 }
 
-#inicio-formulario {
+#header {
   display: flex;
   flex-direction: row;
 }
 
 #logo-formulario {
-  margin-top: 3%;
-  margin-left: 3%;
-  width: 50px;
+  margin-top: 8%;
+  margin-left: 8%;
+  width: 68px;
+  height: 74px;
 }
 
 #titulo-formulario {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: sans-serif;
+  font-family: 'Ubuntu';
+  font-style: normal;
   font-size: 24px;
   color: white;
-  margin-left: 10%;
+  margin-left: 3%;
+  margin-top: 20%;
 }
 
 #subtitulo-formulario {
-  font-family: sans-serif;
+  font-family: 'Open Sans';
   color: white;
-  margin-left: 94px;
+  margin-left: 10%;
 }
 
 body {
@@ -49,7 +52,7 @@ label {
 #div-formulario {
   background-color: #31955f;
   width: 330px;
-  height: 694px;
+  height: 730px;
 }
 
 #formulario {
@@ -61,28 +64,43 @@ select,
 textarea,
 button {
   border: 1px solid grey;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 input,
 select {
-  width: 260px;
-  height: 24px;
+  width: 280px;
+  height: 28px;
 }
 
 .botao-formulario {
-  width: 128px;
-  height: 24px;
+  width: 138px;
+  height: 28px;
+  margin-top: 10px;
 }
 
 .campo {
   margin-bottom: 1em;
 }
 
+button {
+  cursor: pointer;
+}
+
 #container-card-contador {
   display: flex;
   flex-direction: row;
   gap: 14px;
+}
+
+#container-card-contador h3 {
+  margin-top: 14px;
+  font-size: 16px;
+}
+
+.qtde-contador {
+  margin-top: 5px;
+  font-size: 24px;
 }
 
 .card-contador {
@@ -92,12 +110,49 @@ select {
   height: 80px;
   color: #084420;
   text-align: center;
+  box-shadow: 5px 5px 5px #DDDDDD;
+  cursor: pointer;
 }
 
 #container-card-dica {
-  border-radius: 5px;
-  height: 550px;
+  height: 580px;
   overflow-y: scroll;
+}
+
+#div-cards {
+  background-color: white;
+  padding: 10px;
+  max-width: 614px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 5px 5px 5px #DDDDDD;
+}
+
+#titulo-card {
+  padding: 10px;
+  text-align: center;
+  font-size: 24px;
+}
+
+#conteudo-card {
+  line-height: 28px;
+}
+
+.botao-card {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #084420;
+}
+
+#botoes-card-video {
+  margin-top: 10px;
+  margin-left: 500px;
+}
+
+#botoes-card {
+  margin-top: 10px;
+  margin-left: 534px;
 }
 
 #barra-pesquisa {
@@ -111,26 +166,17 @@ select {
 }
 
 #barra-pesquisa button {
+  width: 30px;
+  height: 30px;
   padding: 5px;
-  border-radius: 40%;
+  border-radius: 50%;
   background-color: white;
   border: 2px solid #084420;
 }
 
 #input-pesquisa {
-  width: 595px;
+  width: 590px;
   height: 30px;
   border: 2px solid #084420;
   border-radius: 15px;
-}
-
-#modal {
-  width: 500px;
-  height: 500px;
-  background-color: #aba9a9;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
 }

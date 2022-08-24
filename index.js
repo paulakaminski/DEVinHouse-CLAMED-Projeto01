@@ -1,221 +1,164 @@
-const dbDicas = [
+const listaInicial = [
   {
-    id: 1,
     titulo: "Grid vs Flex-Box",
     linguagem: "CSS",
     categoria: "FrontEnd",
     descricao:
       "A diferença crucial entre flexbox e grid, além do primeiro ser unidimensional e o outro ser bi-dimensional, é que o controle do layout no grid vem do container e no flexbox vem dos elementos.",
     video: "https://www.youtube.com/watch?v=x-4z_u8LcGc",
-  },
+  }
 ];
 
-//FUNÇÕES PARA SETAR E COLETAR ITEM DO LOCALSTORAGE//
+//SETAR E COLETAR ITEM DO LOCALSTORAGE
 
 const getLocalStorage = () => JSON.parse(localStorage.getItem("db_dicas"));
-const setLocalStorage = () =>
+const dbDicas = getLocalStorage();
+
+if (dbDicas == null) {
+  localStorage.setItem("db_dicas", JSON.stringify(listaInicial));
+}
+if (listaInicial.length > dbDicas.length) {
+  localStorage.setItem("db_dicas", JSON.stringify(listaInicial));
+} else {
   localStorage.setItem("db_dicas", JSON.stringify(dbDicas));
-setLocalStorage();
+}
 
-//FUNÇÃO PARA SALVAR OS DADOS DA DICA ENVIADA NO FORMULARIO//
+//FUNÇÃO A SER EXECUTADA NO ENVIO DO FORMULÁRIO
 
-let dica = {};
+const formulario = document.getElementById("formulario");
+formulario.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+    salvarDica();
+    contarCategorias();
+
+  window.alert("SUCESSO! \n Dica cadastrada na base do conhecimento.");
+
+  formulario.reset();
+});
+
+//SALVAR OS DADOS DA DICA ENVIADA PELO FORMULARIO
+
 const salvarDica = () => {
+  (titulo = document.querySelector("#titulo").value),
+    (linguagem = document.querySelector("#linguagem").value),
+    (categoria = document.querySelector("#categoria").value),
+    (descricao = document.querySelector("#descricao").value),
+    (video = document.querySelector("#link-video").value);
+
   dica = {
-    id: dbDicas.length + 1,
-    titulo: document.querySelector("#titulo").value,
-    linguagem: document.querySelector("#linguagem").value,
-    categoria: document.querySelector("#categoria").value,
-    descricao: document.querySelector("#descricao").value,
-    linkVideo: document.querySelector("#link-video").value,
+    titulo: titulo,
+    linguagem: linguagem,
+    categoria: categoria,
+    descricao: descricao,
+    video: video,
   };
+
   dbDicas.push(dica);
+  localStorage.setItem("db_dicas", JSON.stringify(dbDicas));
+
+  carregarCards(dbDicas);
 };
 
-//FUNÇÃO PARA CARREGAR ITENS NA TELA//
+//FUNÇÃO CARREGAR ITENS NA TELA
 
 const divContainerCards = document.getElementById("container-card-dica");
-const divCards = document.createElement("div");
-divContainerCards.appendChild(divCards);
 
-function carregarCardsArray() {
-  let array = getLocalStorage();
-  array.forEach((item) => {
-    let botaoExcluir, botaoEditar, botaoVideo;
+function carregarCards(array) {
+  divContainerCards.innerHTML = "";
 
-    divCards.style.backgroundColor = "white";
-    divCards.style.padding = "10px";
-    divCards.style.maxWidth = "630px";
-    divCards.style.borderRadius = "5px";
+  var novoCard;
 
-    const divTitulo = document.createElement("div");
-    divTitulo.innerHTML += item.titulo;
-    divCards.appendChild(divTitulo);
-    divTitulo.style.padding = "10px";
-    divTitulo.style.textAlign = "center";
-    divTitulo.style.fontSize = "18px";
-
-    const divLinguagem = document.createElement("div");
-    divLinguagem.innerHTML += `Linguagem/Skill: ${item.linguagem}`;
-    divCards.appendChild(divLinguagem);
-    divLinguagem.style.padding = "3px";
-
-    const divCategoria = document.createElement("div");
-    divCategoria.innerHTML += `Categoria: ${item.categoria}`;
-    divCards.appendChild(divCategoria);
-    divCategoria.style.padding = "3px";
-
-    const divDescricao = document.createElement("div");
-    divDescricao.innerHTML += `Descrição: ${item.descricao}`;
-    divCards.appendChild(divDescricao);
-    divDescricao.style.maxWidth = "610px";
-    divDescricao.style.padding = "3px";
-
-    const divBotoesCards = document.createElement("div");
-    divCards.appendChild(divBotoesCards);
-    divBotoesCards.style.display = "flex";
-    divBotoesCards.style.gap = "10px";
-    divBotoesCards.style.padding = "3px";
-
-    const divBotaoExcluir = document.createElement("div");
-    divBotoesCards.appendChild(divBotaoExcluir);
-    botaoExcluir = document.createElement("button");
-    botaoExcluir.innerHTML += `<i class="fa-regular fa-trash-can"></i>`;
-    divBotaoExcluir.appendChild(botaoExcluir);
-    botaoExcluir.style.padding = "5px";
-    botaoExcluir.style.borderRadius = "50%";
-    botaoExcluir.style.backgroundColor = "white";
-
-    //FUNCAO PARA O BOTAO EXCLUIR - ainda não está funcionando//
-
-    botaoExcluir.onclick = function () {
-      console.log("houve um clique");
-    };
-
-    const divBotaoEditar = document.createElement("div");
-    divBotoesCards.appendChild(divBotaoEditar);
-    botaoEditar = document.createElement("button");
-    botaoEditar.innerHTML += `<i class="fa-regular fa-pen-to-square">`;
-    divBotaoEditar.appendChild(botaoEditar);
-    botaoEditar.style.padding = "5px";
-    botaoEditar.style.borderRadius = "50%";
-    botaoEditar.style.backgroundColor = "white";
-
-    //FUNCAO PARA O BOTAO EDITAR - ainda não está funcionando//
-
-    botaoEditar.onclick = function () {
-      console.log("houve um clique");
-    };
-
-    if (item.linkVideo != "") {
-      divBotaoVideo = document.createElement("div");
-      divBotoesCards.appendChild(divBotaoVideo);
-      botaoVideo = document.createElement("button");
-      botaoVideo.innerHTML += `<i class="fa-solid fa-video"></i>`;
-      divBotaoVideo.appendChild(botaoVideo);
-      botaoVideo.style.padding = "5px";
-      botaoVideo.style.borderRadius = "50%";
-      botaoVideo.style.backgroundColor = "white";
-      botaoVideo.onclick = function () {
-        window.location.href = item.video;
-      };
+  array.forEach((dica, index) => {
+    if (dica.video != "") {
+      novoCard = `<div id="div-cards">
+    <h1 id="titulo-card">${dica.titulo}</h1>
+    <div id="conteudo-card">
+    <p><strong>Linguagem/Skill:</strong> ${dica.linguagem}</p>
+    <p><strong>Categoria:</strong> ${dica.categoria}</p>
+    <p>${dica.descricao}</p>
+    <div id="botoes-card-video">
+    <button id="excluir-card" class="botao-card" onclick="excluir(${index})"><i class="fa-solid fa-trash-can"></i></button>
+    <button id="editar-card" class="botao-card" onclick="editar(${index})"><i class="fa-solid fa-pen-to-square"></i></button>
+    <button id="video-card" class="botao-card" onclick="mostrarVideo(${index})"><i class="fa-solid fa-video"></i></button>
+    </div>
+    </div>
+    </div>
+    `;
+    } else {
+      novoCard = `<div id="div-cards">
+    <h1 id="titulo-card">${dica.titulo}</h1>
+    <div id="conteudo-card">
+    <p><strong>Linguagem/Skill:</strong> ${dica.linguagem}</p>
+    <p><strong>Categoria:</strong> ${dica.categoria}</p>
+    <p>${dica.descricao}</p> 
+    <div id="botoes-card">
+    <button id="excluir-card" class="botao-card" onclick="excluir(${index})"><i class="fa-solid fa-trash-can"></i></button>
+    <button id="editar-card" class="botao-card" onclick="editar(${index})"><i class="fa-solid fa-pen-to-square"></i></button>
+    </div>
+    </div>
+    </div>
+    `;
     }
+    divContainerCards.innerHTML += novoCard;
   });
 }
-carregarCardsArray();
 
-//FUNÇÃO PARA CRIAR NOVOS CARDS DE DICAS EM TELA//
+//CHAMAR FUNÇÃO PARA CARREGAR ITENS NA TELA
+carregarCards(dbDicas);
 
-function criarCardsDicas() {
-  let botaoExcluir, botaoEditar, botaoVideo;
+//FUNÇÃO EXCLUSÃO
 
-  divCards.style.backgroundColor = "white";
-  divCards.style.padding = "10px";
-  divCards.style.maxWidth = "630px";
-  divCards.style.borderRadius = "5px";
+function excluir(index) {
+  dbDicas.forEach((dica, indexDicas) => {
+    if (indexDicas == index) {
+      if (
+        confirm("DELETANDO!\nVocê tem certeza que deseja deletar esta dica?") ==
+        true
+      ) {
+        dbDicas.splice(index, 1);
+      }
+    }
+  });
 
-  const divTitulo = document.createElement("div");
-  divTitulo.innerHTML += dica.titulo;
-  divCards.appendChild(divTitulo);
-  divTitulo.style.padding = "10px";
-  divTitulo.style.textAlign = "center";
-  divTitulo.style.fontSize = "18px";
-  divTitulo.style.padding = "3px";
+  divContainerCards.innerHTML = "";
+  localStorage.setItem("db_dicas", JSON.stringify(dbDicas));
+  carregarCards(dbDicas);
+  contarCategorias();
+}
 
-  const divLinguagem = document.createElement("div");
-  divLinguagem.innerHTML += `Linguagem/Skill: ${dica.linguagem}`;
-  divCards.appendChild(divLinguagem);
-  divLinguagem.style.padding = "3px";
+//FUNÇÃO EDIÇÃO
 
-  const divCategoria = document.createElement("div");
-  divCategoria.innerHTML += `Categoria: ${dica.categoria}`;
-  divCards.appendChild(divCategoria);
-  divCards.style.padding = "3px";
+function editar(index) {
+  dbDicas.forEach((dica, indexDicas) => {
+    if (indexDicas == index) {
+      alert(
+        "EDIÇÃO!\nAs informações da dica selecionada para edição foram enviadas para o formulário lateral.\nRealize as devidas edições e clique em Salvar para finalizar."
+      );
+      document.querySelector("#titulo").value = dica.titulo;
+      document.querySelector("#linguagem").value = dica.linguagem;
+      document.querySelector("#categoria").value = dica.categoria;
+      document.querySelector("#descricao").value = dica.descricao;
+      document.querySelector("#link-video").value = dica.video;
 
-  const divDescricao = document.createElement("div");
-  divDescricao.innerHTML += `Descrição: ${dica.descricao}`;
-  divCards.appendChild(divDescricao);
-  divDescricao.style.maxWidth = "610px";
-  divDescricao.style.padding = "3px";
-
-  const divBotoesCards = document.createElement("div");
-  divCards.appendChild(divBotoesCards);
-  divBotoesCards.style.display = "flex";
-  divBotoesCards.style.gap = "10px";
-  divBotoesCards.style.padding = "3px";
-
-  const divBotaoExcluir = document.createElement("div");
-  divBotoesCards.appendChild(divBotaoExcluir);
-  botaoExcluir = document.createElement("button");
-  botaoExcluir.innerHTML += `<i class="fa-regular fa-trash-can"></i>`;
-  divBotaoExcluir.appendChild(botaoExcluir);
-  botaoExcluir.style.padding = "5px";
-  botaoExcluir.style.borderRadius = "50%";
-  botaoExcluir.style.backgroundColor = "white";
-
-  //FUNCAO PARA O BOTAO EXCLUIR//
-
-  botaoExcluir.onclick = function () {
-    console.log("houve um clique");
-  };
-
-  const divBotaoEditar = document.createElement("div");
-  divBotoesCards.appendChild(divBotaoEditar);
-  botaoEditar = document.createElement("button");
-  botaoEditar.innerHTML += `<i class="fa-regular fa-pen-to-square">`;
-  divBotaoEditar.appendChild(botaoEditar);
-  botaoEditar.style.padding = "5px";
-  botaoEditar.style.borderRadius = "50%";
-  botaoEditar.style.backgroundColor = "white";
-
-  //FUNCAO PARA O BOTAO EDITAR//
-
-  botaoEditar.onclick = function () {
-    console.log("houve um clique");
-  };
-
-  if (dica.linkVideo != "") {
-    divBotaoVideo = document.createElement("div");
-    divBotoesCards.appendChild(divBotaoVideo);
-    botaoVideo = document.createElement("button");
-    botaoVideo.innerHTML += `<i class="fa-solid fa-video"></i>`;
-    divBotaoVideo.appendChild(botaoVideo);
-    botaoVideo.style.padding = "5px";
-    botaoVideo.style.borderRadius = "50%";
-    botaoVideo.style.backgroundColor = "white";
-    botaoVideo.onclick = function () {
-      window.location.href = dica.video;
+      dbDicas.splice(index, 1);
     };
-  }
-}
+  });
+};
 
-//FUNÇÃO PARA REMOVER ITENS DA TELA//
+//FUNÇÃO MOSTRAR VIDEO
 
-function removerDicasDaTela() {
-  divCards.parentNode.removeChild(divCards);
-}
+function mostrarVideo(index) {
+  array = getLocalStorage();
+  array.forEach((dica, indexDicas) => {
+    if (indexDicas == index) {
+      // url = window.location.href = dica.video;
+      winOpen = window.open((window.location.href = dica.video), "_blank");
+    };
+  });
+};
 
-//FUNÇÃO PARA CONTAGEM DAS CATEGORIAS + MOSTRAR NOS CARDS CONTADORES//
+//CONTAGEM DAS CATEGORIAS
 
 const contarCategorias = () => {
   const array = getLocalStorage();
@@ -230,8 +173,10 @@ const contarCategorias = () => {
     (item) => item.categoria === "FullStack"
   ).length;
   const qtdeSoftskill = array.filter(
-    (item) => item.categoria === "SoftSkill/Comportamental"
+    (item) => item.categoria === "SoftSkill"
   ).length;
+
+  //MOSTRAR NOS CARDS CONTADORES
 
   const divContadorTotal = document.getElementById("contador-total");
   divContadorTotal.innerHTML = `${qtdetotal}`;
@@ -250,41 +195,79 @@ const contarCategorias = () => {
 };
 contarCategorias();
 
-//FUNÇÃO A SER EXECUTADA NO ENVIO DO FORMULÁRIO//
+//FUNÇÃO PARA FILTRAR CARDS DICAS POR CATEGORIA CLICANDO NOS CARDS CONTADORES
 
-const formulario = document.getElementById("formulario");
+const botaoTotal = document.getElementById("botao-contador-total");
+const botaoFrontend = document.getElementById("botao-contador-frontend");
+const botaoBackend = document.getElementById("botao-contador-backend");
+const botaoFullstack = document.getElementById("botao-contador-fullstack");
+const botaoSoftskill = document.getElementById("botao-contador-softskill");
 
-formulario.addEventListener("submit", function (event) {
-  event.preventDefault();
+var localizaCategoria;
 
-  salvarDica();
-  criarCardsDicas();
-  setLocalStorage();
-  contarCategorias();
-
-  window.alert("SUCESSO! \n Dica cadastrada na base do conhecimento.");
-
-  formulario.reset();
+botaoTotal.addEventListener("click", function () {
+  const dbDicas = getLocalStorage();
+  carregarCards(dbDicas);
 });
 
-//FUNÇÃO DE FILTRO DA BARRA DE PESQUISA - ainda não está funcionando//
+botaoFrontend.addEventListener("click", function () {
+  const dbDicas = getLocalStorage();
+  localizaCategoria = dbDicas.filter((dica) => dica.categoria === "FrontEnd");
+  if (localizaCategoria.length >= 1) {
+    carregarCards(localizaCategoria);
+  } else {
+    alert("Ainda não há nenhuma dica de FrontEnd cadastrada.");
+  }
+});
 
-// let pesquisar = document.getElementById("botao-pesquisar");
-// pesquisar.onclick = function () {
-//   let cards = getLocalStorage();
-//   let itemDePesquisa = document.getElementById("input-pesquisa").value;
+botaoBackend.addEventListener("click", function () {
+  const dbDicas = getLocalStorage();
+  localizaCategoria = dbDicas.filter((dica) => dica.categoria === "BackEnd");
+  if (localizaCategoria.length >= 1) {
+    carregarCards(localizaCategoria);
+  } else {
+    alert("Ainda não há nenhuma dica de BackEnd cadastrada.");
+  }
+});
 
-//   resultadoDaBusca = cards.find((item) => item.titulo == itemDePesquisa);
+botaoFullstack.addEventListener("click", function () {
+  const dbDicas = getLocalStorage();
+  localizaCategoria = dbDicas.filter((dica) => dica.categoria === "FullStack");
+  if (localizaCategoria >= 1) {
+    carregarCards(localizaCategoria);
+  } else {
+    alert("Ainda não há nenhuma dica de FullStack cadastrada.");
+  }
+});
 
-//   if (resultadoDaBusca != null) {
-//     removerDicasDaTela();
-//     criarCardsDicas(resultadoDaBusca);
-//   }
-// };
+botaoSoftskill.addEventListener("click", function () {
+  const dbDicas = getLocalStorage();
+  localizaCategoria = dbDicas.filter((dica) => dica.categoria === "SoftSkill");
+  if (localizaCategoria >= 1) {
+    carregarCards(localizaCategoria);
+  } else {
+    alert("Ainda não há nenhuma dica de SoftSkill cadastrada.");
+  }
+});
 
-// let limparPesquisa = document.getElementById("botao-limpar-pesquisa");
-// limparPesquisa.onclick = function () {
-//   let cards = getLocalStorage();
-//   criarCardsDicas(cards);
-//   console.log("foi clicado");
-// };
+//FUNÇÃO DE FILTRO DA BARRA DE PESQUISA
+
+const pesquisar = document.getElementById("botao-pesquisar");
+pesquisar.onclick = function (array) {
+  itemDePesquisa = document.getElementById("input-pesquisa").value;
+
+  resultadoDaBusca = dbDicas.find((dica) => dica.titulo === itemDePesquisa);
+
+  if (resultadoDaBusca != null) {
+    carregarCards([resultadoDaBusca]);
+    console.log(resultadoDaBusca);
+  } else {
+    window.alert("Não foi encontrado nenhum resultado com este título.");
+  };
+};
+
+limparPesquisa = document.getElementById("botao-limpar-pesquisa");
+limparPesquisa.onclick = function () {
+  itemDePesquisa.value = '';
+  carregarCards(dbDicas);
+};
